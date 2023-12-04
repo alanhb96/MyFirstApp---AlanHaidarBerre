@@ -23,20 +23,33 @@ export default function App() {
 
   const onSelectHandler = (id) => {
     setModalVisible(!modalVisible)
-    setItemSelectedToDelete(itemList.find(item => item.id === id))
+    setItemSelectedToDelete(itemList.find((item) => item.id === id))
   }
 
   const onDeleteItemHandler = () => {
     setItemList(itemList.filter((item) => item.id!==itemSelectedToDelete.id))
-    setItemSelectedToDelete('')
     setModalVisible(!modalVisible)
   } 
 
+  const onBackgroundColorChangeHandler = (id) => {
+    setItemList((prevItems) =>
+    prevItems.map((item) =>
+      item.id === id
+        ? {
+            ...item,
+            backgroundColor: item.backgroundColor === '#83B692' ? '#CDC1FF' : '#83B692',
+          }
+        : item
+    )
+  )
+}
+
   const renderListItem = ({item}) =>(
-      <View style = {styles.itemList}>
+      <View style = {{...styles.itemList, backgroundColor: item.backgroundColor || '#CDC1FF'}}>
         <Text>
           {item.value}
         </Text>
+        <Button title= '√' onPress={() => onBackgroundColorChangeHandler(item.id)} color='#A594F9'/>
         <Button title= 'X' onPress={() => onSelectHandler(item.id)} color='#A594F9'/>
       </View>
   )
@@ -78,8 +91,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
-    backgroundColor: '#CDC1FF',
+    padding: 15,
+    margin: 15, 
     borderRadius: 10,
   },
 });

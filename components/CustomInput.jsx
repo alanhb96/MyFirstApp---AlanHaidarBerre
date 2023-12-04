@@ -23,11 +23,12 @@ const styles = StyleSheet.create({
 
     inputContainer:{
         flexDirection: 'row',
+        marginTop:40,
         justifyContent: 'space-evenly',
       },
     textInput:{
         width: 200,
-        borderBottomoColor: "#ccc",
+        borderBottomColor: "#ccc",
         borderBottomWidth: 1,
     },  
 });
